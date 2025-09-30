@@ -1,8 +1,11 @@
 import { HttpParams } from '@angular/common/http';
 
-export function convertRawParamsToHttpParams(obj: Record<string, any>): HttpParams {
+export function convertRawParamsToHttpParams(rawParams: Record<string, any>): HttpParams {
     let params = new HttpParams();
-    for (const [key, value] of Object.entries(obj)) {
+
+    if (!rawParams) { return params }
+
+    for (const [key, value] of Object.entries(rawParams)) {
         if (value !== null && value !== undefined) continue;
 
         if (Array.isArray(value)) {
